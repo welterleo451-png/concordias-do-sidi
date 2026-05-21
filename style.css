@@ -158,6 +158,38 @@ h2 {
 @keyframes pulse-music { from { transform: scale(1); } to { transform: scale(1.3); } }
 .music-label { letter-spacing: .04em; }
 
+/* ---------- WHATSAPP FLUTUANTE ---------- */
+.whatsapp-float {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .75rem 1.5rem .75rem 1.1rem;
+  background: #25D366;
+  color: var(--white);
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: .9rem;
+  box-shadow: 0 4px 20px rgba(37,211,102,.45);
+  transition: var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.whatsapp-float svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--white);
+  flex-shrink: 0;
+}
+.whatsapp-float:hover {
+  background: #1ebe57;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(37,211,102,.6);
+}
+
 /* ---------- NAVBAR ---------- */
 #navbar {
   position: fixed;
@@ -408,46 +440,6 @@ h2 {
 .tab-content.active { display: block; animation: fadeIn .4s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-.menu-card {
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: var(--transition);
-}
-.menu-card:hover { transform: translateY(-6px); border-color: rgba(232,160,32,.4); box-shadow: 0 16px 40px rgba(0,0,0,.4); }
-.menu-card-img { position: relative; height: 200px; overflow: hidden; }
-.menu-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-.menu-card:hover .menu-card-img img { transform: scale(1.08); }
-.menu-tag {
-  position: absolute;
-  top: .75rem; right: .75rem;
-  background: var(--brand-amber);
-  color: var(--brand-dark);
-  font-size: .7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  padding: .3rem .8rem;
-  border-radius: 50px;
-}
-.menu-card-body { padding: 1.25rem 1.5rem 1.5rem; }
-.menu-card-body h3 {
-  font-family: var(--ff-heading);
-  font-size: 1.2rem;
-  color: var(--white);
-  margin-bottom: .5rem;
-}
-.menu-card-body p { color: rgba(255,255,255,.6); font-size: .9rem; line-height: 1.6; }
-.menu-card-footer { margin-top: 1rem; display: flex; align-items: center; justify-content: space-between; }
-.preco { font-weight: 700; color: var(--brand-amber); font-size: 1rem; }
-.menu-card-text .menu-card-body h3 { color: var(--white); }
-
 .cardapio-note {
   margin-top: 3rem;
   color: rgba(255,255,255,.5);
@@ -672,40 +664,6 @@ h2 {
 .info-item span, .info-item a { color: rgba(255,255,255,.75); font-size: .95rem; transition: color .2s; }
 .info-item a:hover { color: var(--brand-amber); }
 
-.map-placeholder {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  height: 420px;
-  box-shadow: var(--shadow);
-}
-.map-placeholder img { width: 100%; height: 100%; object-fit: cover; }
-.map-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(26,10,0,.65);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-}
-.map-overlay > span { color: var(--white); font-weight: 700; font-size: 1.05rem; text-align: center; }
-.btn-insta {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  padding: .75rem 1.75rem;
-  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-  color: var(--white);
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: .9rem;
-  transition: var(--transition);
-  box-shadow: 0 4px 18px rgba(220,39,67,.4);
-}
-.btn-insta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220,39,67,.5); }
-
 /* ---------- FOOTER ---------- */
 .footer {
   background: #0D0500;
@@ -893,4 +851,6 @@ h2 {
   .sobre-img-wrap img { height: 300px; }
   .galeria-carousel { height: 320px; }
   .galeria-btn { width: 40px; height: 40px; font-size: 1.5rem; }
+  .whatsapp-float span { display: none; }
+  .whatsapp-float { padding: .85rem; border-radius: 50%; }
 }
