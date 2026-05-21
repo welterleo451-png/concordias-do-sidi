@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concórdia's do Sidi – Pizzaria Tradicional | Forno a Lenha</title>
+  <meta name="description" content="Há mais de 20 anos servindo as melhores pizzas com massa caseira e forno a lenha. Uma tradição de família para a sua família." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <img src="images/logo.jpeg" alt="Concórdia's do Sidi Logo" id="nav-logo-img" />
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre Nós</a></li>
+        <li><a href="#cardapio">Cardápio</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><a href="https://wa.me/5555991222706" class="btn-reserva" target="_blank" rel="noopener">Fazer Pedido</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section id="inicio" class="hero">
+    <div class="hero-overlay"></div>
+    <video class="hero-bg" autoplay muted loop playsinline poster="images/hero.png">
+      <source src="images/Anúncio Social Media Concórdia's do Sidi_720p_caption.mp4" type="video/mp4" />
+      <img src="images/hero.png" alt="Forno a lenha da Concórdia's do Sidi" />
+    </video>
+    <div class="hero-content">
+      <p class="hero-tagline">Desde 2003 · Forno a Lenha · Massa Caseira</p>
+      <h1>Uma Tradição que<br /><em>Aquece o Coração</em></h1>
+      <p class="hero-sub">Pizzas artesanais feitas com amor, ingredientes frescos e o sabor único que só o forno a lenha proporciona.</p>
+      <div class="hero-btns">
+        <a href="#cardapio" class="btn-primary">Ver Cardápio</a>
+        <a href="#contato" class="btn-outline">Como Chegar</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Role para baixo</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ========== PLAYER DE MÚSICA FLUTUANTE ========== -->
+  <div class="music-player" id="music-player" title="Música ambiente">
+    <audio id="bg-audio" loop>
+      <source src="images/Concórdia's do Sidi (1).mp3" type="audio/mpeg" />
+    </audio>
+    <button class="music-btn" id="music-btn" aria-label="Tocar/Pausar música">
+      <span class="music-icon play-icon">🎵</span>
+      <span class="music-label">Música</span>
+    </button>
+  </div>
+
+  <!-- ========== BADGES ========== -->
+  <section class="badges">
+    <div class="badge-item">
+      <div class="badge-icon">🍕</div>
+      <div>
+        <strong>+20 Anos</strong>
+        <span>de Tradição</span>
+      </div>
+    </div>
+    <div class="badge-item">
+      <div class="badge-icon">🔥</div>
+      <div>
+        <strong>Forno a Lenha</strong>
+        <span>Sabor Autêntico</span>
+      </div>
+    </div>
+    <div class="badge-item">
+      <div class="badge-icon">👨‍👩‍👧‍👦</div>
+      <div>
+        <strong>Família</strong>
+        <span>Ambiente Acolhedor</span>
+      </div>
+    </div>
+    <div class="badge-item">
+      <div class="badge-icon">🌾</div>
+      <div>
+        <strong>Massa Caseira</strong>
+        <span>Feita Todo Dia</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SOBRE ========== -->
+  <section id="sobre" class="sobre">
+    <div class="container">
+      <div class="sobre-img-wrap">
+        <img src="images/interior.png" alt="Interior da Pizzaria Concórdia's do Sidi" />
+        <div class="sobre-badge-anos">
+          <span class="anos-num">+20</span>
+          <span class="anos-txt">anos de história</span>
+        </div>
+      </div>
+      <div class="sobre-text">
+        <p class="section-label">Nossa História</p>
+        <h2>Mais de Duas Décadas de<br /><em>Paixão pela Pizza</em></h2>
+        <p>A Concórdia's do Sidi nasceu de um sonho simples: reunir famílias em torno de uma boa mesa e de pizzas feitas com carinho, do jeito antigo — massa sovada à mão, molho artesanal e o calor inconfundível do forno a lenha.</p>
+        <p>Em mais de 20 anos, construímos não apenas um restaurante, mas um ponto de encontro de gerações. Aqui, avós trazem netos, amigos se reúnem, e cada pizza conta uma história.</p>
+        <ul class="sobre-lista">
+          <li>✅ Massa sovada artesanalmente todo dia</li>
+          <li>✅ Forno a lenha com temperatura controlada</li>
+          <li>✅ Ingredientes selecionados e frescos</li>
+          <li>✅ Receitas de família, tradição preservada</li>
+        </ul>
+        <a href="#cardapio" class="btn-primary">Conheça nosso cardápio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DIVISOR ========== -->
+  <div class="divisor-forno">
+    <p>"Feita com fogo, amor e tradição desde o primeiro dia."</p>
+  </div>
+
+  <!-- ========== GALERIA ========== -->
+  <section id="galeria" class="galeria">
+    <div class="container-center">
+      <p class="section-label reveal">Nossa Galeria</p>
+      <h2 class="reveal">O Forno que <em>Conta Histórias</em></h2>
+      <p class="section-sub reveal">Cada foto é um convite. Venha viver essa experiência única de sabor e tradição.</p>
+    </div>
+    <div class="galeria-carousel-wrap">
+      <div class="galeria-carousel" id="galeria-carousel">
+        <div class="galeria-slide active">
+          <img src="images/WhatsApp Image 2026-04-24 at 21.27.18.jpeg" alt="Pizzas no forno a lenha da Concórdia's do Sidi" />
+          <div class="galeria-caption">
+            <span>🔥 O calor do forno a lenha</span>
+          </div>
+        </div>
+        <div class="galeria-slide">
+          <img src="images/WhatsApp Image 2026-04-24 at 21.27.18 - doug.jpeg" alt="Pizzas assando no forno a lenha" />
+          <div class="galeria-caption">
+            <span>🍕 Pizzas prontas no forno</span>
+          </div>
+        </div>
+        <div class="galeria-slide">
+          <img src="images/interior.png" alt="Interior aconchegante da Concórdia's do Sidi" />
+          <div class="galeria-caption">
+            <span>🏠 Ambiente aconchegante</span>
+          </div>
+        </div>
+        <div class="galeria-slide">
+          <img src="images/pizza_calabresa.png" alt="Pizza Calabresa artesanal" />
+          <div class="galeria-caption">
+            <span>🍕 Pizza Calabresa – sabor clássico</span>
+          </div>
+        </div>
+        <div class="galeria-slide">
+          <img src="images/pizza_frango.png" alt="Pizza de Frango artesanal" />
+          <div class="galeria-caption">
+            <span>🍕 Pizza de Frango – leveza e sabor</span>
+          </div>
+        </div>
+      </div>
+      <button class="galeria-btn galeria-btn--prev" id="galeria-prev" aria-label="Foto anterior">&#8249;</button>
+      <button class="galeria-btn galeria-btn--next" id="galeria-next" aria-label="Próxima foto">&#8250;</button>
+      <div class="galeria-dots" id="galeria-dots">
+        <button class="galeria-dot active" data-index="0" aria-label="Foto 1"></button>
+        <button class="galeria-dot" data-index="1" aria-label="Foto 2"></button>
+        <button class="galeria-dot" data-index="2" aria-label="Foto 3"></button>
+        <button class="galeria-dot" data-index="3" aria-label="Foto 4"></button>
+        <button class="galeria-dot" data-index="4" aria-label="Foto 5"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CARDÁPIO ========== -->
+  <section id="cardapio" class="cardapio">
+    <div class="container-center">
+      <p class="section-label">Nossas Pizzas</p>
+      <h2>Cardápio <em>Completo</em></h2>
+      <p class="section-sub">Todas as nossas pizzas são assadas no forno a lenha, com massa caseira e ingredientes frescos selecionados.</p>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="salgadas" role="tab">🍕 Salgadas</button>
+        <button class="tab" data-tab="doces" role="tab">🍫 Doces</button>
+        <button class="tab" data-tab="files" role="tab">🥩 Filés</button>
+        <button class="tab" data-tab="precos" role="tab">💰 Preços</button>
+      </div>
+
+      <!-- SALGADAS -->
+      <div class="tab-content active" id="tab-salgadas">
+        <div class="pizza-list">
+          <div class="pizza-item"><div class="pi-name">Alho e Óleo</div><div class="pi-desc">Mussarela, alho e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Atum</div><div class="pi-desc">Mussarela, atum e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Bacon</div><div class="pi-desc">Mussarela, bacon e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Calabresa</div><div class="pi-desc">Mussarela, calabresa e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Camarão</div><div class="pi-desc">Mussarela, camarão, tempero verde e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Colonial</div><div class="pi-desc">Mussarela, salame, bacon, rúcula e orégano</div></div>
+          <div class="pizza-item pizza-item--destaque"><div class="pi-name">Concórdia'S <span class="pi-tag">Especial da Casa</span></div><div class="pi-desc">Mussarela, tomate, cebola, champignon, azeitonas, ovos cozidos e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Coração</div><div class="pi-desc">Mussarela, coração, tempero verde e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Inglesa</div><div class="pi-desc">Mussarela, batata inglesa refogada, bacon e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Flor de Brócolis</div><div class="pi-desc">Mussarela, brócolis, bacon, catupiri e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Frango à Catupiri</div><div class="pi-desc">Mussarela, peito de frango desfiado, catupiri, tempero verde e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Fricassê de Frango</div><div class="pi-desc">Mussarela, frango, molho branco, batata palha e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Gaúcha</div><div class="pi-desc">Mussarela, tomate picado, milho, ervilha e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Lombo Com Abacaxi</div><div class="pi-desc">Mussarela, lombo, abacaxi e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Lombo Defumado</div><div class="pi-desc">Mussarela, lombo defumado e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Mista</div><div class="pi-desc">Mussarela, frango, palmito, calabresa, presunto e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Moda da Casa</div><div class="pi-desc">Mussarela, frango, palmito, milho verde, ervilha e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Napolitana</div><div class="pi-desc">Mussarela, tomate, tempero verde, parmesão e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Palmito</div><div class="pi-desc">Mussarela, palmito e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Picanha Alho e Óleo</div><div class="pi-desc">Mussarela, isca de filé, alho, óleo e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Portuguesa</div><div class="pi-desc">Mussarela, cebola, pimentão, calabresa, presunto, azeitona e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Popeye</div><div class="pi-desc">Mussarela, salame, calabresa, bacon, tomate seco, batata palha e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Quatro Queijos</div><div class="pi-desc">Mussarela, provolone, parmesão, catupiri e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Salame Italiano</div><div class="pi-desc">Mussarela, salame italiano e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Siciliana</div><div class="pi-desc">Mussarela, bacon, champignon, azeitona e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Strogonoff</div><div class="pi-desc">Mussarela, isca de filé e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Tomate Seco</div><div class="pi-desc">Mussarela, tomate seco e rúcula</div></div>
+          <div class="pizza-item pizza-item--premium"><div class="pi-name">5 Estrelas <span class="pi-tag pi-tag--gold">Premium</span></div><div class="pi-desc">Mussarela, picanha, salame, bacon, 4 queijos, frango e orégano</div></div>
+          <div class="pizza-item pizza-item--premium"><div class="pi-name">Picanha 4 Queijos <span class="pi-tag pi-tag--gold">Premium</span></div><div class="pi-desc">Mussarela, picanha, 4 queijos e orégano</div></div>
+          <div class="pizza-item pizza-item--premium"><div class="pi-name">Picanha Acebolada <span class="pi-tag pi-tag--gold">Premium</span></div><div class="pi-desc">Mussarela, picanha, cebola e orégano</div></div>
+          <div class="pizza-item pizza-item--premium"><div class="pi-name">Picanha ao Molho Mostarda <span class="pi-tag pi-tag--gold">Premium</span></div><div class="pi-desc">Mussarela, picanha com molho mostarda e orégano</div></div>
+          <div class="pizza-item"><div class="pi-name">Primavera</div><div class="pi-desc">Mussarela, grizado, ovos e orégano</div></div>
+        </div>
+      </div>
+
+      <!-- DOCES -->
+      <div class="tab-content" id="tab-doces">
+        <div class="pizza-list">
+          <div class="pizza-item"><div class="pi-name">Banana</div><div class="pi-desc">Mussarela, banana, gemada e canela em pó</div></div>
+          <div class="pizza-item"><div class="pi-name">Brigadeiro</div><div class="pi-desc">Mussarela, chocolate preto e chocolate granulado</div></div>
+          <div class="pizza-item"><div class="pi-name">Califórnia</div><div class="pi-desc">Mussarela, figo, pêssego, abacaxi, banana e cereja</div></div>
+          <div class="pizza-item"><div class="pi-name">Coco</div><div class="pi-desc">Mussarela, leite condensado e coco</div></div>
+          <div class="pizza-item pizza-item--destaque"><div class="pi-name">Dois Amores</div><div class="pi-desc">Mussarela, morango, leite condensado e chocolate</div></div>
+          <div class="pizza-item"><div class="pi-name">Floresta Negra</div><div class="pi-desc">Mussarela, chocolate preto ou branco com bombom</div></div>
+          <div class="pizza-item"><div class="pi-name">M&amp;M's</div><div class="pi-desc">Mussarela, leite condensado, chocolate ao leite e M&amp;M's</div></div>
+          <div class="pizza-item"><div class="pi-name">Morango</div><div class="pi-desc">Mussarela, morango e merengue</div></div>
+          <div class="pizza-item"><div class="pi-name">Prestígio</div><div class="pi-desc">Mussarela, leite condensado, chocolate preto, granulado e coco</div></div>
+          <div class="pizza-item"><div class="pi-name">Proposta Indecente</div><div class="pi-desc">Mussarela, chocolate branco e nozes</div></div>
+          <div class="pizza-item"><div class="pi-name">Romeu e Julieta</div><div class="pi-desc">Mussarela, leite condensado e goiabada</div></div>
+        </div>
+      </div>
+
+      <!-- FILÉS -->
+      <div class="tab-content" id="tab-files">
+        <div class="file-list">
+          <div class="file-card">
+            <div class="file-icon">🥩</div>
+            <div class="file-body">
+              <h3>Filé Catupiri</h3>
+              <p>Filé grelhado e gratinado com molho de queijo, arroz à grega e fritas</p>
+            </div>
+          </div>
+          <div class="file-card">
+            <div class="file-icon">🥩</div>
+            <div class="file-body">
+              <h3>Filé Parmegiana</h3>
+              <p>Filé à milanesa, com presunto, queijo, arroz branco e fritas</p>
+            </div>
+          </div>
+          <div class="file-card">
+            <div class="file-icon">🥩</div>
+            <div class="file-body">
+              <h3>Filé Forestieré</h3>
+              <p>Filé grelhado com molho madeira, ervilha, bacon, champignon e batata nozete</p>
+            </div>
+          </div>
+          <div class="file-card">
+            <div class="file-icon">🥩</div>
+            <div class="file-body">
+              <h3>Filé Califórnia</h3>
+              <p>Filé grelhado, arroz branco, purê, banana à milanesa e frutas (pêssego, figo e abacaxi)</p>
+            </div>
+          </div>
+        </div>
+        <p class="cardapio-note">🍽️ Consulte preços e disponibilidade pelo WhatsApp.</p>
+      </div>
+
+      <!-- PREÇOS -->
+      <div class="tab-content" id="tab-precos">
+        <div class="preco-extras">
+          <div class="preco-extra-item">🛵 <strong>Tele Entrega:</strong> R$10,00</div>
+          <div class="preco-extra-item">🧀 <strong>Borda Catupiry ou Cheddar:</strong> R$6,00</div>
+        </div>
+        <div class="preco-cards">
+          <div class="preco-card">
+            <div class="preco-card-header">Pizza M</div>
+            <div class="preco-card-size">30 cm · até 3 sabores</div>
+            <div class="preco-card-price">R$75<span>,00</span></div>
+            <ul>
+              <li>✔ 12 fatias</li>
+              <li>✔ Acompanha refrigerante 600ml</li>
+            </ul>
+          </div>
+          <div class="preco-card preco-card--popular">
+            <div class="preco-card-badge">⭐ Mais Pedido</div>
+            <div class="preco-card-header">Pizza G</div>
+            <div class="preco-card-size">35 cm · até 4 sabores</div>
+            <div class="preco-card-price">R$90<span>,00</span></div>
+            <ul>
+              <li>✔ 16 fatias</li>
+              <li>✔ Acompanha refrigerante 2L</li>
+            </ul>
+          </div>
+          <div class="preco-card">
+            <div class="preco-card-header">Pizza GG</div>
+            <div class="preco-card-size">40 cm · até 4 sabores</div>
+            <div class="preco-card-price">R$100<span>,00</span></div>
+            <ul>
+              <li>✔ 16 fatias</li>
+              <li>✔ Acompanha refrigerante 2L</li>
+            </ul>
+          </div>
+          <div class="preco-card preco-card--combo">
+            <div class="preco-card-badge">👨‍👩‍👧‍👦 Combo Família</div>
+            <div class="preco-card-header">Pizza GG + M</div>
+            <div class="preco-card-size">Combinação especial</div>
+            <div class="preco-card-price">R$155<span>,00</span></div>
+            <ul>
+              <li>✔ Acompanha refrigerante 2L</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== DEPOIMENTOS ========== -->
+  <section id="depoimentos" class="depoimentos">
+    <div class="container-center">
+      <p class="section-label">O que dizem nossos clientes</p>
+      <h2>Amor em Cada <em>Fatia</em></h2>
+      <div class="depo-grid">
+        <div class="depo-card">
+          <div class="depo-stars">⭐⭐⭐⭐⭐</div>
+          <p>"Frequento a Concórdia's há mais de 10 anos. A qualidade nunca caiu. Melhor pizza da cidade, sem dúvida alguma!"</p>
+          <div class="depo-autor">
+            <div class="depo-avatar">M</div>
+            <div>
+              <strong>Maria Aparecida</strong>
+              <span>Cliente fiel há 10 anos</span>
+            </div>
+          </div>
+        </div>
+        <div class="depo-card depo-card--destaque">
+          <div class="depo-stars">⭐⭐⭐⭐⭐</div>
+          <p>"A massa caseira é algo que não encontro em nenhum outro lugar. O forno a lenha faz toda a diferença. Família incrível que coloca amor no que faz!"</p>
+          <div class="depo-autor">
+            <div class="depo-avatar">J</div>
+            <div>
+              <strong>João Carlos</strong>
+              <span>Cliente desde 2005</span>
+            </div>
+          </div>
+        </div>
+        <div class="depo-card">
+          <div class="depo-stars">⭐⭐⭐⭐⭐</div>
+          <p>"Trouxe minha família inteira e todo mundo amou! O ambiente é aconchegante, o atendimento é maravilhoso e a pizza é divina."</p>
+          <div class="depo-autor">
+            <div class="depo-avatar">A</div>
+            <div>
+              <strong>Ana Paula</strong>
+              <span>Cliente satisfeita</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTATO ========== -->
+  <section id="contato" class="contato">
+    <div class="container">
+      <div class="contato-info">
+        <p class="section-label">Nos Encontre</p>
+        <h2>Venha Nos <em>Visitar</em></h2>
+        <p>Estamos esperando você e sua família para uma experiência única. Faça seu pedido pelo WhatsApp ou venha pessoalmente.</p>
+        <div class="info-items">
+          <div class="info-item">
+            <span class="info-icon">📍</span>
+            <div>
+              <strong>Endereço</strong>
+              <span>Rua Osório Pedro Ilgenfrtiz, 962 – Assis Brasil, Ijuí – RS</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">📞</span>
+            <div>
+              <strong>Telefone / WhatsApp</strong>
+              <a href="https://wa.me/5555991222706" target="_blank" rel="noopener">(55) 9 9122.2706</a>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">🕐</span>
+            <div>
+              <strong>Horário de Funcionamento</strong>
+              <span>Quarta a Domingo: Das 19h às 23h</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">📱</span>
+            <div>
+              <strong>Instagram</strong>
+              <a href="https://www.instagram.com/concordiasdosidi/" target="_blank" rel="noopener">@concordiasdosidi</a>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/5555991222706" class="btn-whatsapp" target="_blank" rel="noopener" id="whatsapp-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.771.46 3.431 1.265 4.878L2 22l5.232-1.238A9.96 9.96 0 0 0 12.004 22C17.531 22 22 17.523 22 12.004 22 6.477 17.531 2 12.004 2zm0 18.131a8.13 8.13 0 0 1-4.15-1.136l-.297-.177-3.104.734.778-3.022-.194-.31A8.122 8.122 0 0 1 3.87 12.004c0-4.491 3.645-8.135 8.134-8.135 4.491 0 8.136 3.644 8.136 8.135 0 4.49-3.645 8.127-8.136 8.127z"/></svg>
+          Falar pelo WhatsApp
+        </a>
+      </div>
+      <div class="contato-map">
+        <div class="map-placeholder">
+          <img src="images/interior.png" alt="Pizzaria Concórdia's do Sidi" />
+          <div class="map-overlay">
+            <span>📍 Encontre-nos pelo Instagram</span>
+            <a href="https://www.instagram.com/concordiasdosidi/" target="_blank" rel="noopener" class="btn-insta">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+              Ver no Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="images/logo.jpeg" alt="Logo Concórdia's do Sidi" />
+        <p>Concórdia's do Sidi</p>
+        <span>Tradição desde 2003</span>
+      </div>
+      <div class="footer-links">
+        <h4>Links Rápidos</h4>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#cardapio">Cardápio</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h4>Redes Sociais</h4>
+        <a href="https://www.instagram.com/concordiasdosidi/" target="_blank" rel="noopener" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          @concordiasdosidi
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Concórdia's do Sidi · Todos os direitos reservados · Feito com ❤️ e muito forno a lenha</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
