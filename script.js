@@ -2,28 +2,74 @@
    CONCÓRDIA'S DO SIDI – Script Principal
    ===================================================== */
 
+// ---- Video do topo: so no desktop ----
+// Sao 8,4MB. No celular isso custa tempo e franquia de dados do cliente,
+// e as legendas queimadas no video ficam cortadas na tela estreita.
+// Abaixo de 900px fica so o poster (foto do forno).
+(function () {
+  const video = document.getElementById('hero-video');
+  if (!video) return;
+  const source = video.querySelector('source[data-src]');
+  if (!source) return;
+
+  const conexaoEconomica = navigator.connection && navigator.connection.saveData;
+  // matchMedia em vez de innerWidth: innerWidth pode retornar 0 quando a
+  // janela esta oculta/minimizada, e o video nunca carregaria no desktop.
+  const ehDesktop = window.matchMedia('(min-width: 901px)').matches;
+
+  if (ehDesktop && !conexaoEconomica) {
+    source.src = source.dataset.src;
+    video.load();
+    const p = video.play();
+    if (p && p.catch) p.catch(() => {}); // autoplay bloqueado: fica o poster
+  } else {
+    video.removeAttribute('autoplay');
+  }
+})();
+
 // ---- Navbar scroll effect ----
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 60);
-});
+if (navbar) {
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+}
 
 // ---- Mobile nav toggle ----
 const navToggle = document.getElementById('nav-toggle');
 const navLinks  = document.getElementById('nav-links');
 
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  navToggle.classList.toggle('active');
-});
+if (navToggle && navLinks) {
+  navToggle.setAttribute('aria-expanded', 'false');
+  navToggle.setAttribute('aria-controls', 'nav-links');
 
-// Fechar menu ao clicar num link
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.classList.remove('active');
+  function abrirMenu(abrir) {
+    navLinks.classList.toggle('open', abrir);
+    navToggle.classList.toggle('active', abrir);
+    navToggle.setAttribute('aria-expanded', String(abrir));
+    // trava o scroll do fundo: sem isso a pagina rolava atras do menu
+    document.body.classList.toggle('menu-aberto', abrir);
+  }
+
+  navToggle.addEventListener('click', () => {
+    abrirMenu(!navLinks.classList.contains('open'));
   });
-});
+
+  // Fechar ao clicar num link
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => abrirMenu(false));
+  });
+
+  // Fechar com Esc
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && navLinks.classList.contains('open')) abrirMenu(false);
+  });
+
+  // Se voltar pro desktop com o menu aberto, limpa o estado
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900 && navLinks.classList.contains('open')) abrirMenu(false);
+  });
+}
 
 // ---- Tabs do cardápio ----
 const tabs = document.querySelectorAll('.tab');
@@ -46,18 +92,34 @@ const revealEls = document.querySelectorAll(
   '.badge-item, .sobre-img-wrap, .sobre-text, .menu-card, .depo-card, .contato-info, .contato-map, .footer-inner > *'
 );
 
+// Se o usuario pediu menos animacao no sistema, mostra tudo direto.
+const menosAnimacao = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 revealEls.forEach(el => el.classList.add('reveal'));
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
+// IMPORTANTE: alguns elementos ja vem com class="reveal" escrita no HTML
+// (o cabecalho da galeria). Eles nao estavam na lista acima, entao ficavam
+// com opacity:0 e NUNCA eram revelados. Buscar por '.reveal' pega os dois casos.
+const todosReveal = Array.from(document.querySelectorAll('.reveal'));
 
-revealEls.forEach(el => observer.observe(el));
+if (menosAnimacao || !('IntersectionObserver' in window)) {
+  todosReveal.forEach(el => el.classList.add('visible'));
+} else {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), Math.min(i, 6) * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  todosReveal.forEach(el => observer.observe(el));
+
+  // Rede de seguranca: se a animacao nao disparar por qualquer motivo,
+  // o conteudo ficaria invisivel para sempre. Depois de 4s, mostra tudo.
+  setTimeout(() => todosReveal.forEach(el => el.classList.add('visible')), 4000);
+}
 
 // ---- Smooth active nav link ----
 const sections = document.querySelectorAll('section[id]');
@@ -77,25 +139,34 @@ window.addEventListener('scroll', () => {
 // ---- Player de Música Flutuante ----
 const audio    = document.getElementById('bg-audio');
 const musicBtn = document.getElementById('music-btn');
-const musicIcon = musicBtn.querySelector('.music-icon');
-const musicLabel = musicBtn.querySelector('.music-label');
 
-let playing = false;
+// Sem essa protecao, se o botao nao existir o erro derruba
+// todo o script que vem depois (galeria, carrossel).
+if (audio && musicBtn) {
+  const musicIcon = musicBtn.querySelector('.music-icon');
+  const musicLabel = musicBtn.querySelector('.music-label');
+  let playing = false;
 
-musicBtn.addEventListener('click', () => {
-  if (playing) {
-    audio.pause();
-    musicIcon.textContent = '🎵';
-    musicLabel.textContent = 'Música';
-    musicBtn.classList.remove('playing');
-  } else {
-    audio.play();
-    musicIcon.textContent = '⏸️';
-    musicLabel.textContent = 'Pausar';
-    musicBtn.classList.add('playing');
-  }
-  playing = !playing;
-});
+  musicBtn.addEventListener('click', () => {
+    if (playing) {
+      audio.pause();
+      if (musicIcon) musicIcon.textContent = '🎵';
+      if (musicLabel) musicLabel.textContent = 'Música';
+      musicBtn.classList.remove('playing');
+      playing = false;
+    } else {
+      // play() devolve Promise e o celular pode bloquear o autoplay
+      Promise.resolve(audio.play()).then(() => {
+        if (musicIcon) musicIcon.textContent = '⏸️';
+        if (musicLabel) musicLabel.textContent = 'Pausar';
+        musicBtn.classList.add('playing');
+        playing = true;
+      }).catch(() => {
+        if (musicLabel) musicLabel.textContent = 'Indisponível';
+      });
+    }
+  });
+}
 
 // ---- Carrossel Galeria ----
 (function () {
