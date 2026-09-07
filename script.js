@@ -57,7 +57,25 @@ if (navToggle && navLinks) {
 
   // Fechar ao clicar num link
   navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => abrirMenu(false));
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href') || '';
+      abrirMenu(false);
+
+      // Fechar o menu remove o overflow:hidden do body, mas o navegador
+      // tenta rolar ate a secao antes disso valer -- e a pagina fica parada.
+      // Por isso rolamos por conta propria no quadro seguinte.
+      // (scrollIntoView respeita o scroll-margin-top da navbar.)
+      if (href.startsWith('#') && href.length > 1) {
+        const alvo = document.querySelector(href);
+        if (alvo) {
+          e.preventDefault();
+          requestAnimationFrame(() => {
+            alvo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', href);
+          });
+        }
+      }
+    });
   });
 
   // Fechar com Esc
