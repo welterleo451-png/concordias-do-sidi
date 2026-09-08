@@ -735,6 +735,98 @@ h2 {
   margin: 0 auto;
 }
 
+/* =====================================================================
+   REFINAMENTOS DE DESIGN (prévia)
+   Só polimento: mesma paleta, mesmas fontes, mesmo layout.
+   Tudo aqui sobrescreve regras acima pela ordem do CSS.
+   ===================================================================== */
+
+/* Detalhes de marca invisíveis até interagir */
+::selection { background: var(--brand-amber); color: var(--brand-dark); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--brand-amber);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Logo na navbar: cantos suaves e um anel âmbar fino, em vez do
+   quadrado seco sobre o fundo escuro */
+.nav-logo img {
+  border-radius: 10px;
+  box-shadow: 0 0 0 2px rgba(232,160,32,.55), 0 4px 14px rgba(0,0,0,.35);
+}
+
+/* Links do menu (desktop): sublinhado âmbar que desliza ao passar o mouse */
+@media (min-width: 901px) {
+  .nav-links li a:not(.btn-reserva) { position: relative; padding-bottom: 4px; }
+  .nav-links li a:not(.btn-reserva)::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%; height: 2px;
+    background: var(--brand-amber);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+  }
+  .nav-links li a:not(.btn-reserva):hover::after { transform: scaleX(1); }
+}
+
+/* Hero: sombra leve no texto para não lavar sobre trechos claros do vídeo */
+.hero-content h1 { text-shadow: 0 2px 30px rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.35); }
+.hero-tagline, .hero-sub { text-shadow: 0 1px 12px rgba(0,0,0,.5); }
+
+/* Botão contornado: vidro fosco, lê melhor sobre o vídeo */
+.btn-outline {
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-color: rgba(255,255,255,.6);
+}
+
+/* Rótulos de seção ("NOSSAS PIZZAS"): traço âmbar antes, toque clássico
+   de cardápio. Nas seções centralizadas, traço dos dois lados. */
+.section-label { display: inline-flex; align-items: center; gap: .6rem; }
+.section-label::before {
+  content: '';
+  width: 22px; height: 2px;
+  background: var(--brand-amber);
+  border-radius: 2px;
+}
+.container-center .section-label::after {
+  content: '';
+  width: 22px; height: 2px;
+  background: var(--brand-amber);
+  border-radius: 2px;
+}
+
+/* Badges: o emoji vira ícone dentro de um círculo âmbar suave */
+.badge-icon {
+  width: 52px; height: 52px;
+  display: grid; place-items: center;
+  font-size: 1.6rem; line-height: 1;
+  border-radius: 50%;
+  background: rgba(232,160,32,.12);
+  border: 1px solid rgba(232,160,32,.28);
+  flex-shrink: 0;
+}
+
+/* Cards do cardápio: raio um pouco maior, descrição mais legível,
+   sombra no hover para dar profundidade */
+.pizza-item { border-radius: 12px; }
+.pizza-item:hover { box-shadow: 0 8px 22px rgba(0,0,0,.28); }
+.pi-desc { color: rgba(255,255,255,.64); }
+
+/* Cards de depoimento: sombra mais suave em repouso */
+.depo-card { box-shadow: 0 2px 16px rgba(90,30,0,.08); }
+
+/* Rodapé: filete degradê vermelho→âmbar no topo, fecha o site com a marca */
+.footer {
+  border-top: 3px solid transparent;
+  border-image: linear-gradient(90deg, var(--brand-red), var(--brand-amber)) 1;
+}
+
 /* ---------- ANIMATIONS ---------- */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
