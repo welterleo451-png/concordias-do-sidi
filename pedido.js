@@ -43,12 +43,12 @@
     if (!box) return [];
     return Array.from(box.querySelectorAll('.pizza-item')).map(item => {
       const nomeEl = item.querySelector('.pi-name');
-      const tag = nomeEl.querySelector('.pi-tag');
       const nome = Array.from(nomeEl.childNodes)
         .filter(n => n.nodeType === Node.TEXT_NODE)
         .map(n => n.textContent).join('').trim();
       const descEl = item.querySelector('.pi-desc');
-      return { nome, grupo, tag: tag ? tag.textContent.trim() : '', desc: descEl ? descEl.textContent.trim() : '' };
+      // data-mais-pedida no cartão do cardápio = aparece em "Mais pedidas" aqui.
+      return { nome, grupo, top: item.hasAttribute('data-mais-pedida'), desc: descEl ? descEl.textContent.trim() : '' };
     }).filter(s => s.nome);
   }
   const SABORES = lerSabores('tab-salgadas', 'Salgadas').concat(lerSabores('tab-doces', 'Doces'));
@@ -165,14 +165,29 @@
       b.setAttribute('aria-pressed', String(ativo));
     });
 
+    const chip = s => {
+      const on = m.sabores.includes(s.nome);
+      const off = !on && cheio;
+      return `<button type="button" class="pm-chip${s.top ? ' pm-chip--top' : ''}" data-sabor="${esc(s.nome)}" aria-pressed="${on}"${off ? ' aria-disabled="true"' : ''} title="${esc(s.desc)}">${esc(s.nome)}</button>`;
+    };
+    const grupo = (titulo, itens) => itens.length
+      ? `<p class="pm-grupo-titulo">${titulo}</p><div class="pm-grupo">${itens.map(chip).join('')}</div>`
+      : '';
+
     const box = $('#pm-chips');
-    box.innerHTML = lista.length
-      ? lista.map(s => {
-          const on = m.sabores.includes(s.nome);
-          const off = !on && cheio;
-          return `<button type="button" class="pm-chip" data-sabor="${esc(s.nome)}" aria-pressed="${on}"${off ? ' aria-disabled="true"' : ''} title="${esc(s.desc)}">${esc(s.nome)}${s.tag ? '<span class="pm-estrela" aria-hidden="true">★</span>' : ''}</button>`;
-        }).join('')
-      : `<p class="pm-sem-resultado">Nenhum sabor encontrado para “${esc(estado.busca.trim())}”.</p>`;
+    if (!lista.length) {
+      box.innerHTML = `<p class="pm-sem-resultado">Nenhum sabor encontrado para “${esc(estado.busca.trim())}”.</p>`;
+    } else if (termo) {
+      // Na busca, lista direta: o que importa é achar o sabor.
+      box.innerHTML = `<div class="pm-grupo">${lista.map(chip).join('')}</div>`;
+    } else {
+      // Sem busca: os mais pedidos primeiro, para decidir rápido.
+      const top = lista.filter(s => s.top);
+      const resto = lista.filter(s => !s.top);
+      box.innerHTML = top.length
+        ? grupo('🔥 Mais pedidas', top) + grupo('Todos os outros sabores', resto)
+        : `<div class="pm-grupo">${lista.map(chip).join('')}</div>`;
+    }
 
     // Mantém o foco no mesmo sabor para quem navega pelo teclado.
     if (focarSabor) {
@@ -229,7 +244,7 @@
           return `<div class="carrinho-item">
             <div class="carrinho-item-topo"><strong>${t.nome} <small>${t.medida}</small></strong><b>${moeda(precoItem(item))}</b></div>
             ${linhas}
-            <p>🥤 Acompanha refri ${t.refri}</p>
+            <p>🥤 Acompanha refri ${t.refri} · sabor a confirmar com a pizzaria</p>
             <button type="button" class="carrinho-remover" data-remover-item="${i}">Remover</button>
           </div>`;
         }).join('')
@@ -311,7 +326,7 @@
         L.push(`• ${multi ? p.rotulo : 'Sabores'}: ${p.sabores.join(', ')}`);
         if (p.borda) L.push(`• Borda ${p.borda}${multi ? ` (na ${p.rotulo})` : ''}`);
       });
-      L.push(`• Acompanha refri ${tam.refri}`);
+      L.push(`• Acompanha refri ${tam.refri} (sabor a confirmar)`);
       L.push('');
     });
 
@@ -334,6 +349,8 @@
     L.push(`*Total estimado: ${moeda(t.total)}*`);
     if (t.entrega) L.push('_A taxa de entrega pode variar conforme a distância._');
     L.push('');
+    // Os sabores de refri mudam: a pergunta já vai pronta para a pizzaria responder.
+    L.push('🥤 Quais sabores de refri vocês têm disponíveis hoje?');
     L.push('Aguardo a confirmação! 😊');
     return L.join('\n');
   }
