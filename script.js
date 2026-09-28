@@ -141,7 +141,8 @@ if (menosAnimacao || !('IntersectionObserver' in window)) {
 
 // ---- Smooth active nav link ----
 const sections = document.querySelectorAll('section[id]');
-const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+// O botão vermelho "Fazer Pedido" fica de fora: âmbar sobre vermelho não se lê.
+const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]:not(.btn-reserva)');
 
 window.addEventListener('scroll', () => {
   let current = '';

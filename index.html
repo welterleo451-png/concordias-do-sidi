@@ -70,7 +70,7 @@
     "paymentAccepted": "Pix, Dinheiro, Cartão de Débito, Cartão de Crédito",
     "potentialAction": {
       "@type": "OrderAction",
-      "target": "https://wa.me/5555991222706"
+      "target": "https://concordiasdosidi.com.br/#pedido"
     }
   }
   </script>
@@ -92,7 +92,7 @@
         <li><a href="#cardapio">Cardápio</a></li>
         <li><a href="#depoimentos">Depoimentos</a></li>
         <li><a href="#contato">Contato</a></li>
-        <li><a href="https://wa.me/5555991222706?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20pedido." class="btn-reserva" target="_blank" rel="noopener">Fazer Pedido</a></li>
+        <li><a href="#pedido" class="btn-reserva">Fazer Pedido</a></li>
       </ul>
     </div>
   </nav>
@@ -111,8 +111,8 @@
       <h1>Uma Tradição que<br /><em>Aquece o Coração</em></h1>
       <p class="hero-sub">Pizzas artesanais feitas com amor, ingredientes frescos e o sabor único que só o forno a lenha proporciona.</p>
       <div class="hero-btns">
-        <a href="#cardapio" class="btn-primary">Ver Cardápio</a>
-        <a href="#contato" class="btn-outline">Como Chegar</a>
+        <a href="#pedido" class="btn-primary">Fazer Pedido</a>
+        <a href="#cardapio" class="btn-outline">Ver Cardápio</a>
       </div>
     </div>
     <div class="hero-scroll">
@@ -135,7 +135,7 @@
   <!-- ========== WHATSAPP FLUTUANTE ========== -->
   <a href="https://wa.me/5555991222706?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20pedido." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar pelo WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.771.46 3.431 1.265 4.878L2 22l5.232-1.238A9.96 9.96 0 0 0 12.004 22C17.531 22 22 17.523 22 12.004 22 6.477 17.531 2 12.004 2zm0 18.131a8.13 8.13 0 0 1-4.15-1.136l-.297-.177-3.104.734.778-3.022-.194-.31A8.122 8.122 0 0 1 3.87 12.004c0-4.491 3.645-8.135 8.134-8.135 4.491 0 8.136 3.644 8.136 8.135 0 4.49-3.645 8.127-8.136 8.127z"/></svg>
-    <span>Fazer Pedido</span>
+    <span>WhatsApp</span>
   </a>
 
   <!-- ========== BADGES ========== -->
@@ -386,9 +386,9 @@
               <li>✔ 12 fatias</li>
               <li>✔ Acompanha refrigerante 600ml</li>
             </ul>
+            <button type="button" class="preco-card-btn" data-pedir="M">Pedir a M</button>
           </div>
-          <div class="preco-card preco-card--popular">
-            <div class="preco-card-badge">⭐ Mais Pedido</div>
+          <div class="preco-card">
             <div class="preco-card-header">Pizza G</div>
             <div class="preco-card-size">35 cm · até 4 sabores</div>
             <div class="preco-card-price">R$90<span>,00</span></div>
@@ -396,8 +396,10 @@
               <li>✔ 16 fatias</li>
               <li>✔ Acompanha refrigerante 2L</li>
             </ul>
+            <button type="button" class="preco-card-btn" data-pedir="G">Pedir a G</button>
           </div>
-          <div class="preco-card">
+          <div class="preco-card preco-card--popular">
+            <div class="preco-card-badge">⭐ Mais Pedida</div>
             <div class="preco-card-header">Pizza GG</div>
             <div class="preco-card-size">40 cm · até 4 sabores</div>
             <div class="preco-card-price">R$100<span>,00</span></div>
@@ -405,6 +407,7 @@
               <li>✔ 16 fatias</li>
               <li>✔ Acompanha refrigerante 2L</li>
             </ul>
+            <button type="button" class="preco-card-btn" data-pedir="GG">Pedir a GG</button>
           </div>
           <div class="preco-card preco-card--combo">
             <div class="preco-card-badge">👨‍👩‍👧‍👦 Combo Família</div>
@@ -414,10 +417,138 @@
             <ul>
               <li>✔ Acompanha refrigerante 2L</li>
             </ul>
+            <button type="button" class="preco-card-btn" data-pedir="COMBO">Pedir o combo</button>
           </div>
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ========== PEDIDO ONLINE ==========
+       O cliente monta o pedido aqui e ele vai pronto para o WhatsApp,
+       onde a pizzaria confirma. Não tem backend nem pagamento online.
+       Os sabores são lidos do próprio cardápio acima (pedido.js). -->
+  <section id="pedido" class="pedido">
+    <div class="pedido-wrap">
+      <div class="pedido-head">
+        <p class="section-label">Peça pelo site</p>
+        <h2>Monte seu <em>Pedido</em></h2>
+        <p class="section-sub">Escolha o tamanho, os sabores e a borda. No final o pedido vai prontinho para o nosso WhatsApp: é só tocar em enviar e aguardar a confirmação.</p>
+        <p class="pedido-status" id="pedido-status" hidden></p>
+      </div>
+
+      <div class="pedido-grid">
+        <!-- MONTADOR -->
+        <div class="pedido-builder">
+          <div class="pedido-step">
+            <h3 class="pedido-step-title"><span>1</span> Escolha o tamanho</h3>
+            <div class="tamanhos" id="pm-tamanhos" role="radiogroup" aria-label="Tamanho da pizza"></div>
+          </div>
+
+          <div class="pedido-step">
+            <h3 class="pedido-step-title"><span>2</span> Escolha os sabores <small id="pm-contador"></small></h3>
+            <div class="pm-subtabs" id="pm-subtabs" hidden></div>
+            <div class="pm-escolhidos" id="pm-escolhidos" aria-live="polite"></div>
+            <div class="pm-ferramentas">
+              <input type="search" class="pm-busca" id="pm-busca" placeholder="Buscar sabor ou ingrediente" aria-label="Buscar sabor ou ingrediente" autocomplete="off" />
+              <div class="pm-filtros" id="pm-filtros" aria-label="Tipo de sabor">
+                <button type="button" class="pm-filtro ativo" data-filtro="Salgadas">Salgadas</button>
+                <button type="button" class="pm-filtro" data-filtro="Doces">Doces</button>
+              </div>
+            </div>
+            <div class="pm-chips" id="pm-chips"></div>
+            <p class="pm-aviso" id="pm-aviso" role="status"></p>
+          </div>
+
+          <div class="pedido-step">
+            <h3 class="pedido-step-title"><span>3</span> Borda recheada <b class="pm-borda-de" id="pm-borda-de"></b></h3>
+            <div class="pm-bordas" id="pm-bordas" role="radiogroup" aria-label="Borda recheada"></div>
+          </div>
+
+          <div class="pedido-adicionar">
+            <div class="pedido-adicionar-preco">Valor desta pizza <strong id="pm-preco">R$ 0,00</strong></div>
+            <button type="button" class="btn-adicionar" id="pm-adicionar">Adicionar ao pedido</button>
+          </div>
+        </div>
+
+        <!-- RESUMO / CHECKOUT -->
+        <aside class="pedido-resumo" id="pedido-resumo" aria-label="Resumo do pedido">
+          <h3>Seu pedido <span class="qtd" id="carrinho-qtd" hidden></span></h3>
+          <div id="carrinho"></div>
+
+          <div id="pedido-checkout" hidden>
+            <form class="pedido-form" id="pedido-form" novalidate>
+              <div class="pf-grupo">
+                <label for="pf-nome">Seu nome</label>
+                <input id="pf-nome" name="nome" autocomplete="name" placeholder="Como podemos te chamar?" />
+              </div>
+
+              <fieldset class="pf-grupo">
+                <legend class="pf-legenda">Como quer receber?</legend>
+                <div class="pf-opcoes">
+                  <label class="pf-opcao"><input type="radio" name="receber" value="entrega" /><span>🛵 Tele-entrega</span></label>
+                  <label class="pf-opcao"><input type="radio" name="receber" value="retirada" /><span>🏠 Retirar no local</span></label>
+                </div>
+              </fieldset>
+
+              <div id="pf-endereco">
+                <div class="pf-grupo">
+                  <label for="pf-rua">Rua e número</label>
+                  <input id="pf-rua" name="endereco" autocomplete="street-address" placeholder="Ex.: Rua das Flores, 123" />
+                </div>
+                <div class="pf-linha">
+                  <div class="pf-grupo">
+                    <label for="pf-bairro">Bairro</label>
+                    <input id="pf-bairro" name="bairro" placeholder="Ex.: Centro" />
+                  </div>
+                  <div class="pf-grupo">
+                    <label for="pf-ref">Referência <small>(opcional)</small></label>
+                    <input id="pf-ref" name="referencia" placeholder="Ex.: casa azul" />
+                  </div>
+                </div>
+              </div>
+
+              <fieldset class="pf-grupo">
+                <legend class="pf-legenda">Forma de pagamento</legend>
+                <div class="pf-opcoes" id="pf-pagamento">
+                  <label class="pf-opcao"><input type="radio" name="pagamento" value="Pix" /><span>Pix</span></label>
+                  <label class="pf-opcao"><input type="radio" name="pagamento" value="Dinheiro" /><span>Dinheiro</span></label>
+                  <label class="pf-opcao"><input type="radio" name="pagamento" value="Cartão de débito" /><span>Débito</span></label>
+                  <label class="pf-opcao"><input type="radio" name="pagamento" value="Cartão de crédito" /><span>Crédito</span></label>
+                </div>
+              </fieldset>
+
+              <div class="pf-grupo" id="pf-troco-box" hidden>
+                <label for="pf-troco">Troco para quanto? <small>(opcional)</small></label>
+                <input id="pf-troco" name="troco" inputmode="decimal" placeholder="Ex.: 150" />
+              </div>
+
+              <div class="pf-grupo">
+                <label for="pf-obs">Observações <small>(opcional)</small></label>
+                <textarea id="pf-obs" name="obs" rows="2" placeholder="Ex.: sabor do refri, tirar cebola…"></textarea>
+              </div>
+            </form>
+
+            <div class="pedido-totais">
+              <div><span>Pizzas</span><span id="tot-pizzas">R$ 0,00</span></div>
+              <div id="tot-entrega-linha"><span>Tele-entrega*</span><span id="tot-entrega">R$ 0,00</span></div>
+              <div class="total"><span>Total estimado</span><span id="tot-total">R$ 0,00</span></div>
+            </div>
+
+            <button type="button" class="btn-enviar-pedido" id="pedido-enviar">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.771.46 3.431 1.265 4.878L2 22l5.232-1.238A9.96 9.96 0 0 0 12.004 22C17.531 22 22 17.523 22 12.004 22 6.477 17.531 2 12.004 2zm0 18.131a8.13 8.13 0 0 1-4.15-1.136l-.297-.177-3.104.734.778-3.022-.194-.31A8.122 8.122 0 0 1 3.87 12.004c0-4.491 3.645-8.135 8.134-8.135 4.491 0 8.136 3.644 8.136 8.135 0 4.49-3.645 8.127-8.136 8.127z"/></svg>
+              Enviar pedido pelo WhatsApp
+            </button>
+            <p class="pedido-nota">*A taxa de entrega pode variar conforme a distância. O valor final e o tempo de entrega são confirmados pelo WhatsApp.</p>
+            <div class="pedido-enviado" id="pedido-enviado" hidden>
+              <p>Abrimos o WhatsApp com o seu pedido. É só tocar em <strong>enviar</strong> por lá.</p>
+              <a id="pedido-reabrir" href="#" target="_blank" rel="noopener">O WhatsApp não abriu? Toque aqui</a>
+            </div>
+            <button type="button" class="pedido-limpar" id="pedido-limpar">Limpar pedido e começar de novo</button>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
 
@@ -470,7 +601,7 @@
       <div class="contato-info">
         <p class="section-label">Nos Encontre</p>
         <h2>Venha Nos <em>Visitar</em></h2>
-        <p>Estamos esperando você e sua família para uma experiência única. Faça seu pedido pelo WhatsApp ou venha pessoalmente.</p>
+        <p>Estamos esperando você e sua família para uma experiência única. Faça seu pedido pelo site, pelo WhatsApp ou venha pessoalmente.</p>
         <div class="info-items">
           <div class="info-item">
             <span class="info-icon">📍</span>
@@ -559,5 +690,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="pedido.js"></script>
 </body>
 </html>
