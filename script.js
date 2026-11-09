@@ -2,29 +2,22 @@
    CONCÓRDIA'S DO SIDI – Script Principal
    ===================================================== */
 
-// ---- Video do topo: so no desktop ----
-// Sao 8,4MB. No celular isso custa tempo e franquia de dados do cliente,
-// e as legendas queimadas no video ficam cortadas na tela estreita.
-// Abaixo de 900px fica so o poster (foto do forno).
+// ---- Botão flutuante "Fazer pedido" ----
+// Só aparece onde ajuda: some no topo (já tem o botão), no próprio pedido,
+// no contato e no rodapé, para não cobrir botões e textos.
 (function () {
-  const video = document.getElementById('hero-video');
-  if (!video) return;
-  const source = video.querySelector('source[data-src]');
-  if (!source) return;
-
-  const conexaoEconomica = navigator.connection && navigator.connection.saveData;
-  // matchMedia em vez de innerWidth: innerWidth pode retornar 0 quando a
-  // janela esta oculta/minimizada, e o video nunca carregaria no desktop.
-  const ehDesktop = window.matchMedia('(min-width: 901px)').matches;
-
-  if (ehDesktop && !conexaoEconomica) {
-    source.src = source.dataset.src;
-    video.load();
-    const p = video.play();
-    if (p && p.catch) p.catch(() => {}); // autoplay bloqueado: fica o poster
-  } else {
-    video.removeAttribute('autoplay');
-  }
+  const botao = document.getElementById('pedido-float');
+  if (!botao) return;
+  if (!('IntersectionObserver' in window)) { botao.classList.add('visivel'); return; }
+  const vistos = new Set();
+  const obs = new IntersectionObserver(entradas => {
+    entradas.forEach(e => (e.isIntersecting ? vistos.add(e.target) : vistos.delete(e.target)));
+    botao.classList.toggle('visivel', vistos.size === 0);
+  });
+  ['.hero', '#pedido', '#contato', '.footer'].forEach(sel => {
+    const el = document.querySelector(sel);
+    if (el) obs.observe(el);
+  });
 })();
 
 // ---- Navbar scroll effect ----
@@ -107,7 +100,7 @@ tabs.forEach(tab => {
 
 // ---- Scroll reveal ----
 const revealEls = document.querySelectorAll(
-  '.badge-item, .sobre-img-wrap, .sobre-text, .menu-card, .depo-card, .contato-info, .contato-map, .footer-inner > *'
+  '.badge-item, .sobre-img-wrap, .sobre-text, .menu-card, .avaliacoes-card, .contato-info, .contato-map, .footer-inner > *'
 );
 
 // Se o usuario pediu menos animacao no sistema, mostra tudo direto.
@@ -162,21 +155,21 @@ const musicBtn = document.getElementById('music-btn');
 // Sem essa protecao, se o botao nao existir o erro derruba
 // todo o script que vem depois (galeria, carrossel).
 if (audio && musicBtn) {
-  const musicIcon = musicBtn.querySelector('.music-icon');
+  const musicIcon = musicBtn.querySelector('.music-icon use');
   const musicLabel = musicBtn.querySelector('.music-label');
   let playing = false;
 
   musicBtn.addEventListener('click', () => {
     if (playing) {
       audio.pause();
-      if (musicIcon) musicIcon.textContent = '🎵';
-      if (musicLabel) musicLabel.textContent = 'Música';
+      if (musicIcon) musicIcon.setAttribute('href', '#i-music');
+      if (musicLabel) musicLabel.textContent = 'Música ambiente';
       musicBtn.classList.remove('playing');
       playing = false;
     } else {
       // play() devolve Promise e o celular pode bloquear o autoplay
       Promise.resolve(audio.play()).then(() => {
-        if (musicIcon) musicIcon.textContent = '⏸️';
+        if (musicIcon) musicIcon.setAttribute('href', '#i-pause');
         if (musicLabel) musicLabel.textContent = 'Pausar';
         musicBtn.classList.add('playing');
         playing = true;

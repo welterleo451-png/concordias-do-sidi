@@ -18,10 +18,10 @@
   // Se mudar algum preço, atualize aqui E na aba "Preços" do cardápio (index.html).
   // A GG vem primeiro e já selecionada porque é a mais pedida.
   const TAMANHOS = {
-    GG:    { nome: 'Pizza GG',     medida: '40 cm',    desc: 'até 4 sabores',      preco: 100, refri: '2L',    destaque: '⭐ Mais pedida', pizzas: [{ rotulo: 'GG', max: 4 }] },
-    G:     { nome: 'Pizza G',      medida: '35 cm',    desc: 'até 4 sabores',      preco: 90,  refri: '2L',    pizzas: [{ rotulo: 'G', max: 4 }] },
-    M:     { nome: 'Pizza M',      medida: '30 cm',    desc: 'até 3 sabores',      preco: 75,  refri: '600ml', pizzas: [{ rotulo: 'M', max: 3 }] },
-    COMBO: { nome: 'Combo GG + M', medida: '2 pizzas', desc: 'GG até 4 · M até 3', preco: 155, refri: '2L',    pizzas: [{ rotulo: 'GG', max: 4 }, { rotulo: 'M', max: 3 }] }
+    GG:    { nome: 'Pizza GG',     medida: '40 cm',    desc: 'até 4 sabores',      preco: 105, refri: '2L',    destaque: 'Mais pedida', pizzas: [{ rotulo: 'GG', max: 4 }] },
+    G:     { nome: 'Pizza G',      medida: '35 cm',    desc: 'até 4 sabores',      preco: 95,  refri: '2L',    pizzas: [{ rotulo: 'G', max: 4 }] },
+    M:     { nome: 'Pizza M',      medida: '30 cm',    desc: 'até 3 sabores',      preco: 80,  refri: '600ml', pizzas: [{ rotulo: 'M', max: 3 }] },
+    COMBO: { nome: 'Combo GG + M', medida: '2 pizzas', desc: 'GG até 4 · M até 3', preco: 160, refri: '2L',    pizzas: [{ rotulo: 'GG', max: 4 }, { rotulo: 'M', max: 3 }] }
   };
   const ORDEM = ['GG', 'G', 'M', 'COMBO'];
   const BORDAS = [
@@ -53,6 +53,20 @@
   }
   const SABORES = lerSabores('tab-salgadas', 'Salgadas').concat(lerSabores('tab-doces', 'Doces'));
 
+  // ---------- filés: lidos do próprio cardápio, inclusive o preço ----------
+  function lerFiles() {
+    const mapa = {};
+    document.querySelectorAll('#tab-files .file-card').forEach(card => {
+      const nome = card.querySelector('h3').textContent.trim();
+      const descEl = card.querySelector('p');
+      const preco = parseFloat(card.querySelector('.file-preco').textContent.replace(/[^\d,]/g, '').replace(',', '.'));
+      if (nome && preco > 0) mapa[nome] = { nome, desc: descEl ? descEl.textContent.trim() : '', preco };
+    });
+    return mapa;
+  }
+  const FILES = lerFiles();
+  const ehFile = item => item.tipo === 'file';
+
   // ---------- estado ----------
   const estado = {
     tamanho: 'GG',
@@ -70,7 +84,7 @@
       const salvo = JSON.parse(localStorage.getItem(CHAVE) || 'null');
       if (!salvo) return;
       if (Array.isArray(salvo.carrinho)) {
-        estado.carrinho = salvo.carrinho.filter(i => i && TAMANHOS[i.tamanho] && Array.isArray(i.pizzas));
+        estado.carrinho = salvo.carrinho.filter(i => i && ((ehFile(i) && FILES[i.nome]) || (TAMANHOS[i.tamanho] && Array.isArray(i.pizzas))));
       }
       if (salvo.form && typeof salvo.form === 'object') {
         Object.keys(estado.form).forEach(k => { if (typeof salvo.form[k] === 'string') estado.form[k] = salvo.form[k]; });
@@ -82,7 +96,7 @@
   }
 
   // Preço sempre recalculado da tabela, nunca do que ficou salvo.
-  const precoItem = item => TAMANHOS[item.tamanho].preco + item.pizzas.filter(p => p.borda).length * PRECO_BORDA;
+  const precoItem = item => ehFile(item) ? FILES[item.nome].preco : TAMANHOS[item.tamanho].preco + item.pizzas.filter(p => p.borda).length * PRECO_BORDA;
   const precoMontagem = () => TAMANHOS[estado.tamanho].preco + estado.montagem.filter(m => m.borda).length * PRECO_BORDA;
   const pizzaAtiva = () => TAMANHOS[estado.tamanho].pizzas[estado.ativa];
   const montagemAtiva = () => estado.montagem[estado.ativa];
@@ -185,7 +199,7 @@
       const top = lista.filter(s => s.top);
       const resto = lista.filter(s => !s.top);
       box.innerHTML = top.length
-        ? grupo('🔥 Mais pedidas', top) + grupo('Todos os outros sabores', resto)
+        ? grupo('<svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg> Mais pedidas', top) + grupo('Todos os outros sabores', resto)
         : `<div class="pm-grupo">${lista.map(chip).join('')}</div>`;
     }
 
@@ -236,6 +250,13 @@
 
     $('#carrinho').innerHTML = n
       ? estado.carrinho.map((item, i) => {
+          if (ehFile(item)) {
+            return `<div class="carrinho-item">
+              <div class="carrinho-item-topo"><strong>${esc(item.nome)}</strong><b>${moeda(precoItem(item))}</b></div>
+              <p>${esc(FILES[item.nome].desc)}</p>
+              <button type="button" class="carrinho-remover" data-remover-item="${i}">Remover</button>
+            </div>`;
+          }
           const t = TAMANHOS[item.tamanho];
           const multi = item.pizzas.length > 1;
           const linhas = item.pizzas.map(p =>
@@ -244,11 +265,11 @@
           return `<div class="carrinho-item">
             <div class="carrinho-item-topo"><strong>${t.nome} <small>${t.medida}</small></strong><b>${moeda(precoItem(item))}</b></div>
             ${linhas}
-            <p>🥤 Acompanha refri ${t.refri} · sabor a confirmar com a pizzaria</p>
+            <p>Acompanha refri ${t.refri} · sabor a confirmar com a pizzaria</p>
             <button type="button" class="carrinho-remover" data-remover-item="${i}">Remover</button>
           </div>`;
         }).join('')
-      : `<div class="carrinho-vazio"><span class="icone" aria-hidden="true">🍕</span>Seu pedido está vazio.<br>Monte sua pizza e toque em <strong>Adicionar ao pedido</strong>.</div>`;
+      : `<div class="carrinho-vazio"><span class="icone" aria-hidden="true"><svg class="ico"><use href="#i-pizza"/></svg></span>Seu pedido está vazio.<br>Monte sua pizza e toque em <strong>Adicionar ao pedido</strong>.</div>`;
 
     renderTotais();
   }
@@ -319,6 +340,11 @@
     const L = ['🍕 *PEDIDO PELO SITE*', ''];
 
     estado.carrinho.forEach((item, i) => {
+      if (ehFile(item)) {
+        L.push(`*${i + 1}. ${item.nome}* — ${moeda(precoItem(item))}`);
+        L.push('');
+        return;
+      }
       const tam = TAMANHOS[item.tamanho];
       const multi = item.pizzas.length > 1;
       L.push(`*${i + 1}. ${tam.nome}* (${tam.medida}) — ${moeda(precoItem(item))}`);
@@ -350,32 +376,56 @@
     if (t.entrega) L.push('_A taxa de entrega pode variar conforme a distância._');
     L.push('');
     // Os sabores de refri mudam: a pergunta já vai pronta para a pizzaria responder.
-    L.push('🥤 Quais sabores de refri vocês têm disponíveis hoje?');
+    if (estado.carrinho.some(i => !ehFile(i))) L.push('🥤 Quais sabores de refri vocês têm disponíveis hoje?');
     L.push('Aguardo a confirmação! 😊');
     return L.join('\n');
   }
 
   // ---------- horário de funcionamento ----------
-  // Quarta a domingo, 19h às 23h30, no horário de Brasília.
-  function estaAberto() {
+  // Quarta a domingo, 19h às 23h, no horário de Brasília.
+  const DIAS_ABERTOS = ['Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const ABRE = 19 * 60;
+  const FECHA = 23 * 60;
+  const NOME_DIA = { Wed: 'quarta', Thu: 'quinta', Fri: 'sexta', Sat: 'sábado', Sun: 'domingo' };
+
+  function agoraBrasilia() {
     try {
       const partes = new Intl.DateTimeFormat('en-US', {
         timeZone: 'America/Sao_Paulo', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
       }).formatToParts(new Date());
       const pega = tipo => (partes.find(p => p.type === tipo) || {}).value;
-      const minutos = parseInt(pega('hour'), 10) * 60 + parseInt(pega('minute'), 10);
-      return ['Wed', 'Thu', 'Fri', 'Sat', 'Sun'].includes(pega('weekday')) && minutos >= 19 * 60 && minutos < 23 * 60 + 30;
+      return { dia: pega('weekday'), minutos: parseInt(pega('hour'), 10) * 60 + parseInt(pega('minute'), 10) };
     } catch (e) { return null; }
   }
+  function proximaAbertura(dia, minutos) {
+    if (DIAS_ABERTOS.includes(dia) && minutos < ABRE) return 'abre hoje às 19h';
+    const semana = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const hoje = semana.indexOf(dia);
+    for (let d = 1; d <= 7; d++) {
+      const proximo = semana[(hoje + d) % 7];
+      if (DIAS_ABERTOS.includes(proximo)) return d === 1 ? 'abre amanhã às 19h' : `abre ${NOME_DIA[proximo]} às 19h`;
+    }
+    return '';
+  }
   function renderStatus() {
-    const aberto = estaAberto();
-    const el = $('#pedido-status');
-    if (aberto === null) return;
-    el.hidden = false;
-    el.className = 'pedido-status ' + (aberto ? 'pedido-status--aberto' : 'pedido-status--fechado');
-    el.textContent = aberto
-      ? '🟢 Aberto agora · pedidos até as 23h30'
-      : '🔴 Fechado agora · abrimos de quarta a domingo, das 19h às 23h30. Você já pode montar o pedido: confirmamos assim que abrirmos.';
+    const agora = agoraBrasilia();
+    if (!agora) return;
+    const aberto = DIAS_ABERTOS.includes(agora.dia) && agora.minutos >= ABRE && agora.minutos < FECHA;
+    const proxima = aberto ? '' : proximaAbertura(agora.dia, agora.minutos);
+
+    const pedido = $('#pedido-status');
+    pedido.hidden = false;
+    pedido.className = 'pedido-status ' + (aberto ? 'pedido-status--aberto' : 'pedido-status--fechado');
+    pedido.textContent = aberto
+      ? 'Aberto agora · pedidos até as 23h'
+      : `Fechado agora · ${proxima}. Funcionamos de quarta a domingo, das 19h às 23h. Você já pode montar o pedido: confirmamos assim que abrirmos.`;
+
+    const topo = document.getElementById('hero-status');
+    if (topo) {
+      topo.hidden = false;
+      topo.className = 'hero-status' + (aberto ? '' : ' hero-status--fechado');
+      topo.textContent = aberto ? 'Aberto agora · pedidos até as 23h' : `Fechado agora · ${proxima}`;
+    }
   }
 
   // ---------- aviso flutuante ----------
@@ -390,6 +440,60 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
   }
+
+  // ---------- filés no pedido ----------
+  function renderFiles() {
+    $('#pm-files-lista').innerHTML = Object.values(FILES).map(f => `<div class="pm-file">
+        <div class="pm-file-txt">
+          <strong>${esc(f.nome)}</strong>
+          <p>${esc(f.desc)}</p>
+          <b>${moeda(f.preco)}</b>
+        </div>
+        <button type="button" class="pm-file-add" data-add-file="${esc(f.nome)}">Adicionar</button>
+      </div>`).join('');
+  }
+  function escolherTipo(tipo) {
+    document.querySelectorAll('.pm-tipo-btn').forEach(b => {
+      const on = b.dataset.tipo === tipo;
+      b.classList.toggle('ativo', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
+    $('#pm-pizza').hidden = tipo !== 'pizza';
+    $('#pm-files').hidden = tipo !== 'file';
+  }
+  // No celular o resumo fica embaixo: leva a pessoa até ele.
+  function irParaResumo() {
+    if (window.matchMedia('(max-width: 1000px)').matches) {
+      $('#pedido-resumo').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  function adicionarFile(nome) {
+    if (!FILES[nome]) return;
+    estado.carrinho.push({ tipo: 'file', nome });
+    salvar();
+    renderCarrinho();
+    $('#pedido-enviado').hidden = true;
+    mostrarToast(`${nome} adicionado ao pedido ✓`);
+  }
+  $('#pm-tipo').addEventListener('click', e => {
+    const b = e.target.closest('[data-tipo]');
+    if (b) escolherTipo(b.dataset.tipo);
+  });
+  $('#pm-files-lista').addEventListener('click', e => {
+    const b = e.target.closest('[data-add-file]');
+    if (!b) return;
+    adicionarFile(b.dataset.addFile);
+    irParaResumo();
+  });
+  document.querySelectorAll('[data-pedir-file]').forEach(b => b.addEventListener('click', () => {
+    adicionarFile(b.dataset.pedirFile);
+    escolherTipo('file');
+    if (window.matchMedia('(max-width: 1000px)').matches) irParaResumo();
+    else raiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+  $('#pedido-outra').addEventListener('click', () => {
+    $('.pedido-builder').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 
   // ---------- eventos: montador ----------
   $('#pm-tamanhos').addEventListener('change', e => {
@@ -473,15 +577,13 @@
     renderCarrinho();
     $('#pedido-enviado').hidden = true;
     mostrarToast('Pizza adicionada ao pedido ✓');
-    // No celular o resumo fica embaixo: leva a pessoa até ele.
-    if (window.matchMedia('(max-width: 1000px)').matches) {
-      $('#pedido-resumo').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    irParaResumo();
   });
 
   // Botões "Pedir a GG" etc. na aba Preços do cardápio.
   document.querySelectorAll('[data-pedir]').forEach(b => b.addEventListener('click', () => {
     if (!TAMANHOS[b.dataset.pedir]) return;
+    escolherTipo('pizza');
     escolherTamanho(b.dataset.pedir);
     raiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }));
@@ -539,6 +641,7 @@
   // ---------- início ----------
   carregar();
   escolherTamanho('GG', true);
+  renderFiles();
   aplicarFormNaTela();
   renderCarrinho();
   renderStatus();
