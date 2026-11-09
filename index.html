@@ -121,7 +121,12 @@
   <!-- ========== HERO ========== -->
   <section id="inicio" class="hero">
     <div class="hero-overlay"></div>
-    <img class="hero-bg" src="images/hero-forno.jpg" alt="Forno a lenha aceso da Concórdia's do Sidi" width="960" height="1280" fetchpriority="high" />
+    <!-- O video tem 8,4MB. No celular ele nao e carregado: fica so o poster (foto do forno).
+         O src so e ligado no computador, via script.js. -->
+    <video class="hero-bg" id="hero-video" autoplay muted loop playsinline preload="none" poster="images/hero-forno.jpg">
+      <source data-src="images/Anúncio Social Media Concórdia's do Sidi_720p_caption.mp4" type="video/mp4" />
+      <img src="images/hero-forno.jpg" alt="Forno a lenha aceso da Concórdia's do Sidi" />
+    </video>
     <div class="hero-content">
       <p class="hero-tagline">Pizzaria em Ijuí · Forno a lenha desde 2003</p>
       <h1>Uma Tradição que<br /><em>Aquece o Coração</em></h1>
@@ -137,6 +142,17 @@
       <div class="scroll-arrow"></div>
     </div>
   </section>
+
+  <!-- ========== PLAYER DE MÚSICA FLUTUANTE ========== -->
+  <div class="music-player" id="music-player" title="Música ambiente">
+    <audio id="bg-audio" loop preload="none">
+      <source src="images/Concórdia's do Sidi.mp3" type="audio/mpeg" />
+    </audio>
+    <button class="music-btn" id="music-btn" type="button" aria-label="Tocar ou pausar a música ambiente">
+      <span class="music-icon"><svg class="ico" aria-hidden="true"><use href="#i-music"/></svg></span>
+      <span class="music-label">Música</span>
+    </button>
+  </div>
 
   <!-- ========== BOTÃO FLUTUANTE ==========
        Leva ao montador de pedido. Some no topo, no próprio pedido, no contato
@@ -500,43 +516,43 @@
     <div class="galeria-carousel-wrap">
       <div class="galeria-carousel" id="galeria-carousel">
         <div class="galeria-slide active">
-          <img src="images/galeria-forno-800.jpg" srcset="images/galeria-forno-800.jpg 800w, images/galeria-forno-960.jpg 960w" sizes="(max-width: 960px) 92vw, 900px" alt="Forno a lenha aceso da Concórdia's do Sidi em Ijuí-RS" width="800" height="1067" loading="lazy" style="object-position:50% 38%" />
+          <img src="images/forno-lenha-aceso.jpg" alt="Forno a lenha da Concórdia's do Sidi em Ijuí-RS" width="410" height="711" loading="lazy" />
           <div class="galeria-caption">
-            <span>Nosso forno a lenha, o segredo do sabor</span>
+            <span>Nosso forno a lenha — o segredo do sabor</span>
           </div>
         </div>
         <div class="galeria-slide">
-          <img src="images/galeria-pizza-no-forno-800.jpg" srcset="images/galeria-pizza-no-forno-800.jpg 800w, images/galeria-pizza-no-forno-960.jpg 960w" sizes="(max-width: 960px) 92vw, 900px" alt="Pizza artesanal assando no forno a lenha" width="800" height="1067" loading="lazy" style="object-position:50% 58%" />
+          <img src="images/pizza-forno-lenha.jpg" alt="Pizza artesanal assando no forno a lenha" width="398" height="700" loading="lazy" />
           <div class="galeria-caption">
             <span>Pizza saindo direto do forno a lenha</span>
           </div>
         </div>
         <div class="galeria-slide">
-          <img src="images/galeria-pizza-artesanal-800.jpg" srcset="images/galeria-pizza-artesanal-800.jpg 800w, images/galeria-pizza-artesanal-1200.jpg 1200w" sizes="(max-width: 960px) 92vw, 900px" alt="Pizza artesanal da Concórdia's do Sidi" width="800" height="800" loading="lazy" />
+          <img src="images/pizza-artesanal.jpg" alt="Pizza artesanal da Concórdia's do Sidi" width="530" height="706" loading="lazy" />
           <div class="galeria-caption">
             <span>Pizzas artesanais com ingredientes frescos</span>
           </div>
         </div>
         <div class="galeria-slide">
-          <img src="images/galeria-pizza-batata-palha-800.jpg" srcset="images/galeria-pizza-batata-palha-800.jpg 800w, images/galeria-pizza-batata-palha-1200.jpg 1200w" sizes="(max-width: 960px) 92vw, 900px" alt="Pizza com batata palha da Concórdia's do Sidi" width="800" height="800" loading="lazy" />
+          <img src="images/pizza-batata-palha.jpg" alt="Pizza com batata palha da Concórdia's do Sidi" width="532" height="707" loading="lazy" />
           <div class="galeria-caption">
             <span>Sabores irresistíveis em cada fatia</span>
           </div>
         </div>
         <div class="galeria-slide">
-          <img src="images/galeria-pizza-quatro-sabores-800.jpg" srcset="images/galeria-pizza-quatro-sabores-800.jpg 800w, images/galeria-pizza-quatro-sabores-1200.jpg 1200w" sizes="(max-width: 960px) 92vw, 900px" alt="Pizza com quatro sabores diferentes" width="800" height="800" loading="lazy" />
+          <img src="images/pizza-mista-sabores.jpg" alt="Pizza mista com vários sabores" width="706" height="703" loading="lazy" />
           <div class="galeria-caption">
             <span>Até 4 sabores na mesma pizza</span>
           </div>
         </div>
         <div class="galeria-slide">
-          <img src="images/galeria-fachada-800.jpg" srcset="images/galeria-fachada-800.jpg 800w, images/galeria-fachada-1400.jpg 1400w" sizes="(max-width: 960px) 92vw, 900px" alt="Fachada da Concórdia's do Sidi à noite, em Ijuí-RS" width="800" height="450" loading="lazy" />
+          <img src="images/salao-concordias-1.jpg" alt="Salão lotado da Pizzaria Concórdia's do Sidi" width="568" height="747" loading="lazy" />
           <div class="galeria-caption">
-            <span>Nossa casa, no bairro Assis Brasil</span>
+            <span>Nosso salão — sempre animado!</span>
           </div>
         </div>
         <div class="galeria-slide">
-          <img src="images/galeria-salao-800.jpg" srcset="images/galeria-salao-800.jpg 800w, images/galeria-salao-960.jpg 960w" sizes="(max-width: 960px) 92vw, 900px" alt="Clientes reunidos no salão da Concórdia's do Sidi" width="800" height="1067" loading="lazy" />
+          <img src="images/salao-concordias-2.jpg" alt="Clientes reunidos no salão da Concórdia's do Sidi" width="960" height="1280" loading="lazy" />
           <div class="galeria-caption">
             <span>Ambiente de família e amigos</span>
           </div>
@@ -696,15 +712,6 @@
           <svg class="ico" aria-hidden="true"><use href="#i-instagram"/></svg>
           @concordiasdosidi
         </a>
-        <div class="music-player" id="music-player">
-          <audio id="bg-audio" loop preload="none">
-            <source src="images/Concórdia's do Sidi.mp3" type="audio/mpeg" />
-          </audio>
-          <button class="music-btn" id="music-btn" type="button" aria-label="Tocar ou pausar a música ambiente">
-            <span class="music-icon"><svg class="ico" aria-hidden="true"><use href="#i-music"/></svg></span>
-            <span class="music-label">Música ambiente</span>
-          </button>
-        </div>
       </div>
     </div>
     <div class="footer-bottom">

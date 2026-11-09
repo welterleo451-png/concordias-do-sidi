@@ -132,8 +132,13 @@ h2 {
 }
 .btn-whatsapp:hover { background: #1ebe57; transform: translateY(-2px); }
 
-/* ---------- MUSIC PLAYER (RODAPÉ) ---------- */
-.music-player { margin-top: .5rem; }
+/* ---------- MUSIC PLAYER FLUTUANTE ---------- */
+.music-player {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 997;
+}
 .music-btn {
   display: flex;
   align-items: center;
@@ -1466,7 +1471,7 @@ a:focus-visible, button:focus-visible {
 .carrinho-vazio .icone .ico { width: 40px; height: 40px; }
 
 /* ---- Topo ---- */
-.hero-bg { object-position: center 38%; }
+@media (max-width: 900px) { .hero-bg { object-position: center 38%; } }
 .hero-status {
   display: inline-flex;
   align-items: center;
@@ -1502,7 +1507,7 @@ a:focus-visible, button:focus-visible {
 .tab, .pm-filtro, .pm-chip { min-height: 44px; }
 .footer-links ul { gap: 0; }
 .footer-links li a, .social-link { display: inline-flex; align-items: center; min-height: 44px; }
-.music-btn { min-height: 44px; box-shadow: none; }
+.music-btn { min-height: 44px; }
 .galeria-btn { width: 44px; height: 44px; }
 .galeria-caption { justify-content: center; text-align: center; padding: 3rem 1.5rem 3.5rem; }
 .galeria-dots { bottom: .35rem; gap: 0; }
@@ -1552,7 +1557,7 @@ a:focus-visible, button:focus-visible {
 .pedido-float:hover { background: #a53224; }
 @media (min-width: 641px) { .pedido-float { right: 2rem; bottom: 2rem; } }
 
-/* ---- Música só no computador, no rodapé ---- */
+/* ---- Música flutuante só no computador ---- */
 @media (max-width: 900px) { .music-player { display: none; } }
 
 /* ---- Contato com ações claras ---- */
@@ -1671,5 +1676,7 @@ a:focus-visible, button:focus-visible {
   .hero-scroll { display: none; }
 }
 
-/* Foto do topo: escurece por multiplicação, mantendo o tom quente do fogo atrás do título */
-.hero-overlay { background: linear-gradient(160deg, rgb(62,26,6) 0%, rgb(128,66,24) 55%, rgb(44,18,4) 100%); mix-blend-mode: multiply; }
+/* Foto do topo no celular: escurece por multiplicação, mantendo o tom quente do fogo atrás do título */
+@media (max-width: 900px) {
+  .hero-overlay { background: linear-gradient(160deg, rgb(62,26,6) 0%, rgb(128,66,24) 55%, rgb(44,18,4) 100%); mix-blend-mode: multiply; }
+}

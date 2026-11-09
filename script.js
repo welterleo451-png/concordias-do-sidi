@@ -2,6 +2,29 @@
    CONCÓRDIA'S DO SIDI – Script Principal
    ===================================================== */
 
+// ---- Video do topo: so no computador ----
+// Sao 8,4MB. No celular isso custa tempo e franquia de dados do cliente,
+// e as legendas do video ficam cortadas na tela estreita.
+// Ate 900px fica so o poster (foto do forno).
+(function () {
+  const video = document.getElementById('hero-video');
+  if (!video) return;
+  const source = video.querySelector('source[data-src]');
+  if (!source) return;
+
+  const conexaoEconomica = navigator.connection && navigator.connection.saveData;
+  const ehDesktop = window.matchMedia('(min-width: 901px)').matches;
+
+  if (ehDesktop && !conexaoEconomica) {
+    source.src = source.dataset.src;
+    video.load();
+    const p = video.play();
+    if (p && p.catch) p.catch(() => {}); // autoplay bloqueado: fica o poster
+  } else {
+    video.removeAttribute('autoplay');
+  }
+})();
+
 // ---- Botão flutuante "Fazer pedido" ----
 // Só aparece onde ajuda: some no topo (já tem o botão), no próprio pedido,
 // no contato e no rodapé, para não cobrir botões e textos.
@@ -163,7 +186,7 @@ if (audio && musicBtn) {
     if (playing) {
       audio.pause();
       if (musicIcon) musicIcon.setAttribute('href', '#i-music');
-      if (musicLabel) musicLabel.textContent = 'Música ambiente';
+      if (musicLabel) musicLabel.textContent = 'Música';
       musicBtn.classList.remove('playing');
       playing = false;
     } else {
